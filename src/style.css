@@ -1,0 +1,24 @@
+/* Site Stylesheet
+  1. NAV BAR 
+ 
+  10.FOOTER 
+  11.MediasQueries 
+======================================== */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.d-flex input{
+    margin: 2em 0em;
+}
+
+.btn {
+    margin: 0em 0.9em;
+  
+}
+
+
