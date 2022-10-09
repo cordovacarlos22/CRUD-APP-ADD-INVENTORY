@@ -16,9 +16,11 @@
     margin: 2em 0em;
 }
 
-.btn {
-    margin: 0em 0.9em;
+.d-flex button{
+    margin: 1.5em .6em;
+    padding: 0.3em  2.4em;
   
 }
+
 
 
