@@ -12,6 +12,8 @@
 }
 
 
+
+
 .d-flex input{
     margin: 2em 0em;
 }
@@ -37,4 +39,9 @@ table .btnedit{
 table .btndelete{
     color: tomato;
     cursor: pointer;
+
+    
 }
+
+
+
