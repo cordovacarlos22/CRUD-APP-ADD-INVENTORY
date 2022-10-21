@@ -1,56 +1,59 @@
 // ----==== SELECTORS ===--- 
-const productName = document.querySelector ('.product-name');
-const addProduct = document.querySelector('.add-product');
-const rowContainer = document.querySelector('.row-container');
-const updId = document.querySelector ('.upd-id '); 
+const form = document.querySelector('form'); // form that hold my inputs
+const productName = document.querySelector ('#proname');  // calls product name input
+const upcId = document.querySelector ('#upc-id');   // calls upc input
+const seller = document.querySelector('#seller'); // calls  sellers input
+const price  = document.querySelector('#price'); // calls price input
+const addProduct = document.querySelector('#bnt-summit');// add a product to my inventory
+const tDataContainer = document.querySelector('tbody'); // table row tbody
+const product = [];  // saves my object (inventory)
+
+
 
 //---===EVENT LISTENER ===--- 
-addProduct.addEventListener('click', addRow);
+
+form.addEventListener('click',onAddDataCell);
 
 
-// ---===FUNTION ===---
-
-function addRow (event){
+// ---===FUNTIONS ===---
+function onAddDataCell (e){
    // prevent form from submitting
- event.preventDefault();
+  e.preventDefault();
+  
+// object
+  objCreado = {
+    name :productName.value,
+    upc: upcId.value,
+    sellers: seller.value,
+    cost: price.value,
+    id: Date.now()
+    
+  }
 
 
-
-// table  container
- const addRow = document.createElement("tr");
- addRow.classList.add("table-row");
-
-
- // create TD
-const tdata = document.createElement("td");
-tdata.innerText = productName.value;
-tdata.innerText = updId.value;
-//const cell = document.createTextNode('HEY');
-//tdata.appendChild(cell);
-addRow.appendChild(tdata);
-
-
-// check mark button
-const completeButton = document.createElement('button');
-completeButton.innerHTML = '<i class="fas fa-check"></i>';
-completeButton.classList.add('complete-btn');
-addRow.appendChild(completeButton);
-
-// CHECK edit Button
-const editButton = document.createElement('button');
-editButton.innerHTML = '<i class="fas fa-edit btnedit"></i>';
-editButton.classList.add('edit-btn');
-addRow.appendChild(editButton);
-
-// CHECK trash Button
-const trashButton = document.createElement('button');
-trashButton.innerHTML = '<i class="fas fa-trash btndelete">';
-trashButton.classList.add('trash-btn');
-addRow.appendChild(trashButton);
-
-rowContainer.appendChild(addRow);
+// add inventory to my object 
+  product.push(objCreado);
+ 
+  
+  print();
 
 }
 
+function print (e){
+  
+  tDataContainer.innerHTML += `
+  <tr> 
+    <td>${objCreado.name}</td>
+    <td>${objCreado.upc}</td>
+    <td>${objCreado.sellers}</td>
+    <td>${objCreado.cost}</td>
+    <td><i class="fas fa-edit btnedit"></i></td>
+    <td><i class="fas fa-trash btndelete"></i></td>
+  </tr>  
+  `;
+  
+}
 
-//--- LOCAL STORAGE ==-- 
+
+
+//--- LOCAL STORAGE ==---
