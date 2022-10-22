@@ -23,10 +23,11 @@
      HEADER 
     -->
     <header>
+        
         <H1 class="d-flex  justify-content-center m-4">Add inventory below</H1>
         <div class="d-flex justify-content-center">
             
-            <form action="#" class="w-50">
+            <form action="#" class="w-75">
                 
                 <input type="text" id="proname" class=" form-control"  required placeholder="Product Name" autocomplete="off" >
                 <input   type="text" id="upc-id" class=" form-control"  required placeholder="UPC CODE" autocomplete="off">
@@ -38,16 +39,16 @@
                         <input type="text" id="price" class=" form-control" required placeholder="Price" autocomplete="off">
                        
                     </div>
-                    <button type="button" class=" d-flex justify-content-center btn btn-outline-success" id="bnt-summit"><i class="fas fa-plus-square">Submit</i></button>
+                    <button type="button" class=" d-flex justify-content-center btn btn-outline-success" id="bnt-summit"><i class="fas fa-plus-square">  Submit</i></button>
                 </div>
             </form>
         </div>
               <!-- CREATE, UPDATE,READ AND DELETE (CRUD-OPERATIONS)-->
               <div class="d-flex justify-content-center flex-wrap">  
-                <button class="add-product btn btn-outline-success" id="bnt-create"><i class="fas fa-plus-square"></i></button>
+                
                 <button class="btn btn-outline-primary" id="bnt-read">Read</button>
                 <button class="btn btn-outline-warning" id="bnt-update">Update</button>
-                <button class="btn btn-outline-danger" id="bnt-delete">Delete</button>
+                
     
             </div>
     </header>
@@ -56,11 +57,10 @@
     -->
     <main>
        
-        <table class="row-container table m-5">
+        <table class="row-container table w-100">
             <thead class=" table-dark">
              
-              <tr>
-                
+              <tr>    
                 <th scope="col">Procuct Name</th>
                 <th scope="col">UPC</th>
                 <th scope="col">Seller</th>
@@ -80,17 +80,7 @@
                     <td><i class="fas fa-edit btnedit"></i></td>
                     <td><i class="fas fa-trash btndelete"></i></td> 
                 </tr>
-            </tbody>
-              
-
-              <div class="tdContainer">
-
-              </div>
-          
-            
-             
-            
-               
+            </tbody>             
         </table>
        </div>
           

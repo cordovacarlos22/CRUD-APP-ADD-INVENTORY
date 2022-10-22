@@ -1,4 +1,5 @@
 // ----==== SELECTORS ===--- 
+const tableEL = document.querySelector('table');
 const form = document.querySelector('form'); // form that hold my inputs
 const productName = document.querySelector ('#proname');  // calls product name input
 const upcId = document.querySelector ('#upc-id');   // calls upc input
@@ -12,13 +13,15 @@ const product = [];  // saves my object (inventory)
 
 //---===EVENT LISTENER ===--- 
 
-form.addEventListener('click',onAddDataCell);
+addProduct.addEventListener('click',onAddDataCell);
+tableEL.addEventListener('click', onDeleteRow);
 
 
 // ---===FUNTIONS ===---
 function onAddDataCell (e){
    // prevent form from submitting
   e.preventDefault();
+  
   
 // object
   objCreado = {
@@ -48,11 +51,23 @@ function print (e){
     <td>${objCreado.sellers}</td>
     <td>${objCreado.cost}</td>
     <td><i class="fas fa-edit btnedit"></i></td>
-    <td><i class="fas fa-trash btndelete"></i></td>
+    <td><i class="btnErase fas fa-trash btndelete"></i></td>
   </tr>  
   `;
   
 }
+
+// DELETE FUNTION 
+ function onDeleteRow (e){
+    const item = e.target;
+    // delete ROW
+    if (e.target.classList.contains ('btndelete')){
+     alert('click on the button')
+      };
+
+  }
+
+ 
 
 
 
