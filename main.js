@@ -12,19 +12,11 @@ const product = [];  // saves my object (inventory)
 
 
 //---===EVENT LISTENER ===--- 
-
-addProduct.addEventListener('click',onAddDataCell);
 tableEL.addEventListener('click', onDeleteRow);
-
-
-// ---===FUNTIONS ===---
-function onAddDataCell (e){
-   // prevent form from submitting
-  e.preventDefault();
+addProduct.addEventListener('click',event =>{
   
-  
-// object
-  objCreado = {
+  // object
+  productS = {
     name :productName.value,
     upc: upcId.value,
     sellers: seller.value,
@@ -33,18 +25,38 @@ function onAddDataCell (e){
     
   }
 
+  product.push(productS);
+  
+  if (localStorage.getItem('intentory') == null) { //check if exist
+        
+    localStorage.setItem('inventory', JSON.stringify(product));
 
-// add inventory to my object 
-  product.push(objCreado);
+ }else { // Cuando ya este creado
+    let datos = localStorage.setItem('inventory', JSON.stringify(productS));
+    
+    datos.push(productS);
+
+    localStorage.setItem('inventory', JSON.stringify(datos));
+ }
  
-  
-  print();
+ 
 
-}
+});
 
-function print (e){
-  
-  tDataContainer.innerHTML += `
+
+
+// ---===FUNTIONS ===---
+
+
+function print (){
+         
+  if (localStorage.getItem('inventory') != null) {
+
+      let datos = JSON.parse(localStorage.getItem('inventory'));
+
+      //Aqui va ir el pintado de los datos
+      datos.forEach(element => {
+        tDataContainer.innerHTML += `
   <tr> 
     <td>${objCreado.name}</td>
     <td>${objCreado.upc}</td>
@@ -54,21 +66,29 @@ function print (e){
     <td><i class="btnErase fas fa-trash btndelete"></i></td>
   </tr>  
   `;
-  
+          
+      });
+  }
+  print ();
 }
+
+
+
 
 // DELETE FUNTION 
  function onDeleteRow (e){
-    const item = e.target;
     // delete ROW
-    if (e.target.classList.contains ('btndelete')){
-     alert('click on the button')
+    if (!e.target.classList.contains ('btndelete')){
+     return;
+
       };
+      const item = e.target;
+      item.closest('tr').remove();
 
   }
+  
 
  
 
-
-
 //--- LOCAL STORAGE ==---
+
