@@ -1,4 +1,5 @@
-// ----==== SELECTORS ===--- 
+
+  // ----==== SELECTORS ===--- 
 const tableEL = document.querySelector('table');
 const form = document.querySelector('form'); // form that hold my inputs
 const productName = document.querySelector ('#proname');  // calls product name input
@@ -13,82 +14,114 @@ const product = [];  // saves my object (inventory)
 
 //---===EVENT LISTENER ===--- 
 tableEL.addEventListener('click', onDeleteRow);
-addProduct.addEventListener('click',event =>{
+addProduct.addEventListener('click',addRow);
   
-  // object
-  productS = {
-    name :productName.value,
-    upc: upcId.value,
-    sellers: seller.value,
-    cost: price.value,
-    id: Date.now()
-    
-  }
-
-  product.push(productS);
-  
-  if (localStorage.getItem('intentory') == null) { //check if exist
-        
-    localStorage.setItem('inventory', JSON.stringify(product));
-
- }else { // Cuando ya este creado
-    let datos = localStorage.setItem('inventory', JSON.stringify(productS));
-    
-    datos.push(productS);
-
-    localStorage.setItem('inventory', JSON.stringify(datos));
- }
- 
- 
-
-});
-
-
-
 // ---===FUNTIONS ===---
 
+    
+function addRow (event){
+  // prevent form from submitting
+event.preventDefault();
 
-function print (){
-         
-  if (localStorage.getItem('inventory') != null) {
+if (productName.value == '' | upcId.value == '' | seller.value == '' | price.value == '' ){
+  alert('MAKE SURE TO FILL FORM COMPLETE');
+  return;
 
-      let datos = JSON.parse(localStorage.getItem('inventory'));
+}
 
-      //Aqui va ir el pintado de los datos
-      datos.forEach(element => {
-        tDataContainer.innerHTML += `
-  <tr> 
-    <td>${objCreado.name}</td>
-    <td>${objCreado.upc}</td>
-    <td>${objCreado.sellers}</td>
-    <td>${objCreado.cost}</td>
-    <td><i class="fas fa-edit btnedit"></i></td>
-    <td><i class="btnErase fas fa-trash btndelete"></i></td>
-  </tr>  
-  `;
-          
-      });
-  }
-  print ();
+objCreate = {
+  name :productName.value,
+  upc: upcId.value,
+  sellers: seller.value,
+  cost: price.value,
+  id: Date.now()
+  
 }
 
 
+product.push(objCreate);
 
+
+// if (localStorage.getItem('inventory') != null) {
+
+//   let datos = JSON.parse(localStorage.getItem('inventory'));
+
+// table  container
+const addRow = document.createElement("tr");
+addRow.classList.add("table-row");
+
+
+// create TD
+// data cell for product name 
+const tdata = document.createElement("td");
+tdata.innerText = productName.value;
+addRow.appendChild(tdata);
+// data cell for upc id
+const tdata1 = document.createElement("td");
+tdata1.innerText = upcId.value;
+addRow.appendChild(tdata1);
+
+// data cell for seller
+const tdata2 = document.createElement("td");
+tdata2.innerText = seller.value;
+addRow.appendChild(tdata2);
+
+// data cell for price
+
+const tdata3 = document.createElement("td");
+tdata3.innerText = price.value;
+addRow.appendChild(tdata3);
+
+
+// CHECK edit Button
+const editButton = document.createElement('button');
+editButton.innerHTML = '<i class="fas fa-edit btnedit"></i>';
+editButton.classList.add('edit-btn');
+addRow.appendChild(editButton);
+
+// CHECK trash Button
+const trashButton = document.createElement('button');
+trashButton.innerHTML = '<i class="fas fa-trash btndelete">';
+trashButton.classList.add('trash-btn');
+addRow.appendChild(trashButton);
+
+tDataContainer.appendChild(addRow);
+
+// save to local storage
+saveLocal ();
+
+
+}
 
 // DELETE FUNTION 
- function onDeleteRow (e){
-    // delete ROW
-    if (!e.target.classList.contains ('btndelete')){
-     return;
+function onDeleteRow (e){
+  // delete ROW
+  if (!e.target.classList.contains ('btndelete')){
+   return;
 
-      };
-      const item = e.target;
-      item.closest('tr').remove();
+    };
+    const item = e.target;
+    item.closest('tr').remove();
 
-  }
-  
+}
+
 
  
 
 //--- LOCAL STORAGE ==---
+
+function saveLocal (e) {
+  if (localStorage.getItem('intentory') == null) { //check if exist
+     
+    localStorage.setItem('inventory', JSON.stringify(product));
+
+ }else { // Cuando ya este creado
+    let datos = localStorage.setItem('inventory', JSON.stringify('inventory'));
+    
+    datos.push(objCreate);
+
+    localStorage.setItem('inventory', JSON.stringify(datos));
+ }
+
+}
 

@@ -75,6 +75,32 @@ table .btndelete{
     
 }
 
+.table-row{
+    flex: 1;
+    width: 100%;
+}
+
+
+.edit-btn,
+.trash-btn{
+    border: none;
+    display: inline-flex;
+    
+    
+
+}
+
+.trash-btn{
+    
+    position: relative;
+    float: right;
+    left: 29px;
+}
+
+
+
+
+
 
 
 
