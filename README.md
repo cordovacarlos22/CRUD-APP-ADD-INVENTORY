@@ -2,7 +2,7 @@
 
 This is a project to put in practice the CRUD operations system, I used HTML,CSS AND Javascript in this project, also Bootstrap was use for a faster way to web responsibe. 
 
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b41ea3e5-c125-4f97-a1d9-615e677b5dcd/deploy-status)](https://app.netlify.com/sites/irescue-phone-inventory-page/deploys)
 
 ## Authors
 
