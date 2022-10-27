@@ -122,3 +122,51 @@ function prints (e){
 
   
 }
+
+
+
+function getTodos (){
+  let todos;
+   if (localStorage.getItem('todos') === null){
+    todos = [];
+   } else {
+    todos = JSON.parse(localStorage.getItem("todos"));
+   }
+   todos.forEach(function(todo) {
+
+    // Todo div 
+const todoDiv = document.createElement("div");
+todoDiv.classList.add("todo");
+// Create LI
+const newTodo = document.createElement('li');
+newTodo.innerText = todo;
+newTodo.classList.add('todo-item');
+todoDiv.appendChild(newTodo);
+
+// check mark button
+const completeButton = document.createElement('button');
+completeButton.innerHTML = '<i class="fas fa-check"></i>';
+completeButton.classList.add('complete-btn');
+todoDiv.appendChild(completeButton);
+
+// CHECK edit Button
+const editButton = document.createElement('button');
+editButton.innerHTML = '<i class="fas fa-edit btnedit"></i>';
+editButton.classList.add('edit-btn');
+todoDiv.appendChild(editButton);
+
+// CHECK trash Button
+const trashButton = document.createElement('button');
+trashButton.innerHTML = '<i class="fas fa-trash btndelete">';
+trashButton.classList.add('trash-btn');
+todoDiv.appendChild(trashButton);
+
+
+// appent to list 
+todoList.appendChild(todoDiv);
+
+    
+   });
+
+
+}
