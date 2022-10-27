@@ -95,7 +95,49 @@
   
     }
     
-  
+   function print (){
+    // table  container
+const addRow = document.createElement("tr");
+addRow.classList.add("table-row");
+
+
+// create TD
+// data cell for product name 
+const tdata = document.createElement("td");
+tdata.innerText = productName.value;
+addRow.appendChild(tdata);
+// data cell for upc id
+const tdata1 = document.createElement("td");
+tdata1.innerText = upcId.value;
+addRow.appendChild(tdata1);
+
+// data cell for seller
+const tdata2 = document.createElement("td");
+tdata2.innerText = seller.value;
+addRow.appendChild(tdata2);
+
+// data cell for price
+
+const tdata3 = document.createElement("td");
+tdata3.innerText = price.value;
+addRow.appendChild(tdata3);
+
+
+// CHECK edit Button
+const editButton = document.createElement('button');
+editButton.innerHTML = '<i class="fas fa-edit btnedit"></i>';
+editButton.classList.add('edit-btn');
+addRow.appendChild(editButton);
+
+// CHECK trash Button
+const trashButton = document.createElement('button');
+trashButton.innerHTML = '<i class="fas fa-trash btndelete">';
+trashButton.classList.add('trash-btn');
+addRow.appendChild(trashButton);
+
+tDataContainer.appendChild(addRow);
+
+   }
    
   
   //--- LOCAL STORAGE ==---

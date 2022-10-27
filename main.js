@@ -1,207 +1,108 @@
 
-  // ----==== SELECTORS ===--- 
+// ----==== SELECTORS ===--- 
 const tableEL = document.querySelector('table');
 const form = document.querySelector('form'); // form that hold my inputs
-const productName = document.querySelector ('#proname');  // calls product name input
-const upcId = document.querySelector ('#upc-id');   // calls upc input
+const productName = document.querySelector('#proname');  // calls product name input
+const upcId = document.querySelector('#upc-id');   // calls upc input
 const seller = document.querySelector('#seller'); // calls  sellers input
-const price  = document.querySelector('#price'); // calls price input
+const price = document.querySelector('#price'); // calls price input
 const addProduct = document.querySelector('#bnt-summit');// add a product to my inventory
 const tDataContainer = document.querySelector('tbody'); // table row tbody
-const product = [];  // saves my object (inventory)
 
 
 
 //---===EVENT LISTENER ===--- 
-tableEL.addEventListener('click', onDeleteRow);
-addProduct.addEventListener('click',addRow);
-document.addEventListener('DOMContentLoaded',getItem);
-  
+addProduct.addEventListener('click', send); // adds a product to produts/inventory  array
+document.addEventListener("DOMContentLoaded",prints);// prins elements to when we open page
+
+
+
 // ---===FUNTIONS ===---
 
-    
-function addRow (event){
-  // prevent form from submitting
-event.preventDefault();
-
-if (productName.value == '' | upcId.value == '' | seller.value == '' | price.value == '' ){
-  alert('MAKE SURE TO FILL FORM COMPLETE');
-  return;
-
-}
-
-objCreate = {
-  name :productName.value,
-  upc: upcId.value,
-  sellers: seller.value,
-  cost: price.value,
-  id: Date.now()
+// sends elements to local stogage and prints them
+function send() {
   
+
+  // does not let send form if not fill complete
+  if (productName.value == '' | upcId.value == '' | seller.value == '' | price.value == '') {
+    alert('MAKE SURE TO FILL FORM COMPLETE');
+    return;
+
+  }
+
+
+  // creates a object for inventory 
+  objInventory = {
+    name: productName.value,
+    upc: upcId.value,
+    sellers: seller.value,
+    cost: price.value,
+    id: Date.now()
+
+  }
+  //--- LOCAL STORAGE ==---
+// variable to set localstogare
+  let inventory = JSON.parse(localStorage.getItem('products'));
+// if for localstogage
+  if (inventory === null) {
+    inventory = [];
+    inventory.push(objInventory);
+    localStorage.setItem('products', JSON.stringify(inventory));
+  } else {
+    inventory.push(objInventory);
+    localStorage.setItem('products', JSON.stringify(inventory));
+  }
+
+  prints(); // prints html elemenets to tDatacontainer
+  // prevent form from submitting
+  e.preventDefault();
+  
+
+
+
+  // clear input form  after an input 
+  productName.value = '';
+  upcId.value = '';
+  seller.value = '';
+  price.value = '';
+
 }
 
 
-product.push(objCreate);
+// create table row and table data using innerHTML.
+function prints() {
 
+  let inventory = JSON.parse(localStorage.getItem('products'));
 
-// table  container
-const addRow = document.createElement("tr");
-addRow.classList.add("table-row");
+  if (inventory != null) {
+    tDataContainer.innerHTML = "";
 
-
-// create TD
-// data cell for product name 
-const tdata = document.createElement("td");
-tdata.innerText = productName.value;
-addRow.appendChild(tdata);
-// data cell for upc id
-const tdata1 = document.createElement("td");
-tdata1.innerText = upcId.value;
-addRow.appendChild(tdata1);
-
-// data cell for seller
-const tdata2 = document.createElement("td");
-tdata2.innerText = seller.value;
-addRow.appendChild(tdata2);
-
-// data cell for price
-
-const tdata3 = document.createElement("td");
-tdata3.innerText = price.value;
-addRow.appendChild(tdata3);
-
-
-// CHECK edit Button
-const editButton = document.createElement('button');
-editButton.innerHTML = '<i class="fas fa-edit btnedit"></i>';
-editButton.classList.add('edit-btn');
-addRow.appendChild(editButton);
-
-// CHECK trash Button
-const trashButton = document.createElement('button');
-trashButton.innerHTML = '<i class="fas fa-trash btndelete">';
-trashButton.classList.add('trash-btn');
-addRow.appendChild(trashButton);
-
-tDataContainer.appendChild(addRow);
-
-
-
-// save to local storage
-saveLocal ();
-getItem ();
-
-// clear input form 
-productName.value = '';
-upcId.value = '';
-seller.value = '';
-price.value = '';
-
-
-// 
-
+    inventory.forEach((element) => {
+      tDataContainer.innerHTML = 
+      tDataContainer.innerHTML + 
+      `
+ <tr> 
+   <td>${element.name}</td>
+   <td>${element.upc}</td>
+   <td>${element.sellers}</td>
+   <td>${element.cost}</td>
+   <td><i class="fas fa-edit btnedit"></i></td>
+   <td><i class="btnErase fas fa-trash btndelete"></i></td>
+ </tr>  
+ `;
+    });
+  }
 }
 
 // DELETE FUNTION 
-function onDeleteRow (e){
-  // delete ROW
-  if (!e.target.classList.contains ('btndelete')){
-   return;
 
-    };
-    const item = e.target;
-    item.closest('tr').remove();
-
+function onDeleteRow(e){
+  console.log(e.path)
+  let inventory = JSON.parse(localStorage.getItem('products'));
 }
 
 
- 
-
-//--- LOCAL STORAGE ==---
-
-function saveLocal (e) {
-  if (localStorage.getItem('inventory') == null) { //check if exist
-     
-    localStorage.setItem('inventory', JSON.stringify(product));
-
- }else { // Cuando ya este creado
-    let datos = localStorage.setItem('inventory', JSON.stringify('inventory'));
-    
-    datos.push(objCreate);
-
-    localStorage.setItem('inventory', JSON.stringify(datos));
- }
-
-}
-
-function getItem (){
-  if (localStorage.getItem('inventory') != null) {
-  
-    let datos = JSON.parse(localStorage.getItem('inventory'));
 
 
-
-    //Aqui va ir el pintado de los datos
-    datos.forEach(element => {
-      
-      objCreate = {
-        name :productName.value,
-        upc: upcId.value,
-        sellers: seller.value,
-        cost: price.value,
-        id: Date.now()
-        
-      }
-      
-      
-      product.push(objCreate);
-      
-      
-      // table  container
-      const addRow = document.createElement("tr");
-      addRow.classList.add("table-row");
-      
-      
-      // create TD
-      // data cell for product name 
-      const tdata = document.createElement("td");
-      tdata.innerText = productName.value;
-      addRow.appendChild(tdata);
-      // data cell for upc id
-      const tdata1 = document.createElement("td");
-      tdata1.innerText = upcId.value;
-      addRow.appendChild(tdata1);
-      
-      // data cell for seller
-      const tdata2 = document.createElement("td");
-      tdata2.innerText = seller.value;
-      addRow.appendChild(tdata2);
-      
-      // data cell for price
-      
-      const tdata3 = document.createElement("td");
-      tdata3.innerText = price.value;
-      addRow.appendChild(tdata3);
-      
-      
-      // CHECK edit Button
-      const editButton = document.createElement('button');
-      editButton.innerHTML = '<i class="fas fa-edit btnedit"></i>';
-      editButton.classList.add('edit-btn');
-      addRow.appendChild(editButton);
-      
-      // CHECK trash Button
-      const trashButton = document.createElement('button');
-      trashButton.innerHTML = '<i class="fas fa-trash btndelete">';
-      trashButton.classList.add('trash-btn');
-      addRow.appendChild(trashButton);
-      
-      tDataContainer.appendChild(addRow);
-      
-    
-   
-     
-    });
-}
-}
 
 
