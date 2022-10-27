@@ -81,24 +81,43 @@ function prints() {
       tDataContainer.innerHTML = 
       tDataContainer.innerHTML + 
       `
- <tr> 
+ <tr class='trContainer' key = ${element.id}> 
    <td>${element.name}</td>
    <td>${element.upc}</td>
    <td>${element.sellers}</td>
    <td>${element.cost}</td>
-   <td><i class="fas fa-edit btnedit"></i></td>
-   <td><i class="btnErase fas fa-trash btndelete"></i></td>
+   <td><i onclick='update(event)' class="fas fa-edit btnedit"></i></td>
+   <td><i onclick='onDeleteRow(event)' class="btnErase fas fa-trash btndelete"></i></td>
+   <td style='display:none'>${element.id}</td>
  </tr>  
  `;
     });
   }
 }
 
-// DELETE FUNTION 
 
+// DELETE FUNTION 
 function onDeleteRow(e){
-  console.log(e.path)
+  //console.log(e.path[2].childNodes[13].innerHTML)
+  // console.log(e.path[2].getAttribute('key'));
+   let findTr = e.path[2].getAttribute('key'); // to  find element id or key 
+
   let inventory = JSON.parse(localStorage.getItem('products'));
+  let index = inventory.findIndex((element) => element.id == findTr);
+
+  inventory.splice(inventory,1); // delete element from array
+
+  localStorage.setItem('products', JSON.stringify(inventory)); // updated DOM OR localstorage
+
+  prints()
+
+  form.reset();
+
+
+}
+// update function or edit function
+function update(e){
+
 }
 
 
