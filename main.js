@@ -31,6 +31,8 @@ function send() {
   }
 
 
+
+
   // creates a object for inventory 
   objInventory = {
     name: productName.value,
@@ -57,9 +59,6 @@ function send() {
   // prevent form from submitting
   e.preventDefault();
   
-
-
-
   // clear input form  after an input 
   productName.value = '';
   upcId.value = '';
@@ -112,7 +111,6 @@ function onDeleteRow(e){
   prints()
 
   form.reset();
-
 
 }
 // update function or edit function
