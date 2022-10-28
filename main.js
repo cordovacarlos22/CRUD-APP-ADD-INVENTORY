@@ -9,10 +9,12 @@ const price = document.querySelector('#price'); // calls price input
 const addProduct = document.querySelector('#bnt-summit');// add a product to my inventory
 const editProduct = document.querySelector('#bnt-edits'); // edits product to inventory
 const tDataContainer = document.querySelector('tbody'); // table row tbody
-
+let referenceForUpdate2 = '';
 //---===EVENT LISTENER ===--- 
 addProduct.addEventListener('click', send); // adds a product to produts/inventory  array
+editProduct.addEventListener('click', update2);// calls update function
 document.addEventListener("DOMContentLoaded", prints);// prins elements to when we open page
+
 
 // ---===FUNTIONS ===---
 
@@ -116,12 +118,48 @@ function update(e) {
   let inventory = JSON.parse(localStorage.getItem('products')); // to bring DOM
   let index = inventory.findIndex((element) => element.id == findTr); // TO FIND INDEX
 
-  // to bring data into inputs 
+  // to bring data into inputs from LOCALSTORAGE
   productName.value = inventory[index].name;
   upcId.value = inventory[index].upc;
   seller.value = inventory[index].sellers;
   price.value = inventory[index].cost;
+  // to hidde add product button.
+  addProduct.classList.add("d-none");
+  // to show update button.
+  editProduct.classList.remove("d-none");
+  
+  referenceForUpdate2 = inventory[index].id; // finds id element to use as a reference to update data
+}
 
+function update2 (){
+  // creates a object for inventory 
+  objInventory = {
+    name: productName.value,
+    upc: upcId.value,
+    sellers: seller.value,
+    cost: price.value,
+    id: referenceForUpdate2
+  }
+
+  let inventory = JSON.parse(localStorage.getItem('products')); // to bring DOM
+  let index = inventory.findIndex((element) => element.id == objInventory); // TO FIND INDEX
+
+  inventory.splice(inventory, 1, objInventory); // delete element from array
+
+  localStorage.setItem('products', JSON.stringify(inventory)); // updated DOM OR localstorage
+
+  prints()
+
+  // clear input form  after an input 
+  productName.value = '';
+  upcId.value = '';
+  seller.value = '';
+  price.value = '';
+  
+  // to hidde add product button.
+  addProduct.classList.remove("d-none");
+  // to show update button.
+  editProduct.classList.add("d-none");
 
 }
 
