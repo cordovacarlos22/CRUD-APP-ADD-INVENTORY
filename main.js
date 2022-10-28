@@ -87,6 +87,13 @@ function prints() {
  `;
     });
   }
+
+  // clear input form  after an input 
+  productName.value = '';
+  upcId.value = '';
+  seller.value = '';
+  price.value = '';
+
 }
 
 // DELETE FUNTION 
