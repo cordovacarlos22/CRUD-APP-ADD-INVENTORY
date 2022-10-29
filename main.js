@@ -156,7 +156,7 @@ function update2(){
 
   localStorage.setItem('products', JSON.stringify(inventory)); // updated DOM OR localstorage
 
-  prints()
+  prints();
 
   
   // to hidde add product button.
