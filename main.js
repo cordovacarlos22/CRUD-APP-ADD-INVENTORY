@@ -35,7 +35,7 @@ function send() {
     upc: upcId.value,
     sellers: seller.value,
     cost: price.value,
-    id: Date.now()
+    id: Date.now(),
 
   }
   //--- LOCAL STORAGE ==---
@@ -53,13 +53,13 @@ function send() {
 
   prints(); // prints html elemenets to tDatacontainer
   // prevent form from submitting
-  e.preventDefault();
+  form.reset();
 
-  // clear input form  after an input 
-  productName.value = '';
-  upcId.value = '';
-  seller.value = '';
-  price.value = '';
+  // // clear input form  after an input 
+  // productName.value = '';
+  // upcId.value = '';
+  // seller.value = '';
+  // price.value = '';
 
 }
 
@@ -88,11 +88,11 @@ function prints() {
     });
   }
 
-  // clear input form  after an input 
-  productName.value = '';
-  upcId.value = '';
-  seller.value = '';
-  price.value = '';
+  // // clear input form  after an input 
+  // productName.value = '';
+  // upcId.value = '';
+  // seller.value = '';
+  // price.value = '';
 
 }
 
@@ -100,8 +100,8 @@ function prints() {
 function onDeleteRow(e) {
   //console.log(e.path[2].childNodes[13].innerHTML)
   // console.log(e.path[2].getAttribute('key'));
-  let findTr = e.path[2].getAttribute('key'); // to  find element id or key 
-
+  let findTr = e.path[2].childNodes[13].innerHTML; // to  find element id or key 
+console.log(findTr);
   let inventory = JSON.parse(localStorage.getItem('products'));
   let index = inventory.findIndex((element) => element.id == findTr);
 
@@ -111,17 +111,17 @@ function onDeleteRow(e) {
 
   prints()
 
-   // clear input form  after an input 
-   productName.value = '';
-   upcId.value = '';
-   seller.value = '';
-   price.value = '';
+  //  // clear input form  after an input 
+  //  productName.value = '';
+  //  upcId.value = '';
+  //  seller.value = '';
+  //  price.value = '';
 
 }
 // update function or edit function
 function update(e) {
-
-  let findTr = e.path[2].getAttribute('key'); // to  find element id or key 
+  
+  let findTr = e.path[2].childNodes[13].innerHTML; // to  find element id or key 
   let inventory = JSON.parse(localStorage.getItem('products')); // to bring DOM
   let index = inventory.findIndex((element) => element.id == findTr); // TO FIND INDEX
 
@@ -138,42 +138,19 @@ function update(e) {
   referenceForUpdate2 = inventory[index].id; // finds id element to use as a reference to update data
 }
 
-function update2 (){
-  // creates a object for inventory 
-  objInventory = {
-    name: productName.value,
-    upc: upcId.value,
-    sellers: seller.value,
-    cost: price.value,
-    id: referenceForUpdate2
-  }
 
-  let inventory = JSON.parse(localStorage.getItem('products')); // to bring DOM
-  let index = inventory.findIndex((element) => element.id == objInventory); // TO FIND INDEX
-
-  inventory.splice(inventory, 1, objInventory); // delete element from array
-
-  localStorage.setItem('products', JSON.stringify(inventory)); // updated DOM OR localstorage
-
-  prints()
-
-  
+function update2(){
+  console.log(referenceForUpdate2);
   
   // to hidde add product button.
   addProduct.classList.remove("d-none");
   // to show update button.
   editProduct.classList.add("d-none");
 
-  // clear input form  after an input 
-  productName.value = '';
-  upcId.value = '';
-  seller.value = '';
-  price.value = '';
+  // // clear input form  after an input 
+  // productName.value = '';
+  // upcId.value = '';
+  // seller.value = '';
+  // price.value = '';
 
 }
-
-
-
-
-
-
