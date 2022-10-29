@@ -81,7 +81,11 @@ table .btndelete{
 }
 
 
-
+.fa-trash,
+.fa-check,
+.fa-edit{
+  pointer-events: none;
+}
 
 
 
