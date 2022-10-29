@@ -81,21 +81,6 @@ table .btndelete{
 }
 
 
-.edit-btn,
-.trash-btn{
-    border: none;
-    display: inline-flex;
-    
-    
-
-}
-
-.trash-btn{
-    
-    position: relative;
-    float: right;
-    left: 29px;
-}
 
 
 
