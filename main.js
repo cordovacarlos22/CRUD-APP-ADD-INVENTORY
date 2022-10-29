@@ -30,7 +30,7 @@ function send() {
   }
 
   // creates a object for inventory 
-  objInventory = {
+  let objInventory = {
     name: productName.value,
     upc: upcId.value,
     sellers: seller.value,
@@ -55,11 +55,11 @@ function send() {
   // prevent form from submitting
   form.reset();
 
-  // // clear input form  after an input 
-  // productName.value = '';
-  // upcId.value = '';
-  // seller.value = '';
-  // price.value = '';
+  // clear input form  after an input 
+  productName.value = '';
+  upcId.value = '';
+  seller.value = '';
+  price.value = '';
 
 }
 
@@ -75,7 +75,7 @@ function prints() {
       tDataContainer.innerHTML =
         tDataContainer.innerHTML +
         `
- <tr class='trContainer' key = ${element.id}> 
+ <tr class='trContainer' key=${element.id}> 
    <td>${element.name}</td>
    <td>${element.upc}</td>
    <td>${element.sellers}</td>
@@ -88,11 +88,11 @@ function prints() {
     });
   }
 
-  // // clear input form  after an input 
-  // productName.value = '';
-  // upcId.value = '';
-  // seller.value = '';
-  // price.value = '';
+  // clear input form  after an input 
+  productName.value = '';
+  upcId.value = '';
+  seller.value = '';
+  price.value = '';
 
 }
 
@@ -105,17 +105,17 @@ console.log(findTr);
   let inventory = JSON.parse(localStorage.getItem('products'));
   let index = inventory.findIndex((element) => element.id == findTr);
 
-  inventory.splice(inventory, 1); // delete element from array
+  inventory.splice(index, 1); // delete element from array
 
   localStorage.setItem('products', JSON.stringify(inventory)); // updated DOM OR localstorage
 
   prints()
 
-  //  // clear input form  after an input 
-  //  productName.value = '';
-  //  upcId.value = '';
-  //  seller.value = '';
-  //  price.value = '';
+   // clear input form  after an input 
+   productName.value = '';
+   upcId.value = '';
+   seller.value = '';
+   price.value = '';
 
 }
 // update function or edit function
@@ -140,17 +140,34 @@ function update(e) {
 
 
 function update2(){
-  console.log(referenceForUpdate2);
+  // creates a object for inventory 
+  let objInventory = {
+    name: productName.value,
+    upc: upcId.value,
+    sellers: seller.value,
+    cost: price.value,
+    id:referenceForUpdate2,
+
+  }
+  let inventory = JSON.parse(localStorage.getItem('products')); // to bring DOM
+  let index = inventory.findIndex((element) => element.id == objInventory.id); // TO FIND INDEX
+  
+  inventory.splice(index, 1, objInventory); // delete element from array
+
+  localStorage.setItem('products', JSON.stringify(inventory)); // updated DOM OR localstorage
+
+  prints()
+
   
   // to hidde add product button.
   addProduct.classList.remove("d-none");
   // to show update button.
   editProduct.classList.add("d-none");
 
-  // // clear input form  after an input 
-  // productName.value = '';
-  // upcId.value = '';
-  // seller.value = '';
-  // price.value = '';
+  // clear input form  after an input 
+  productName.value = '';
+  upcId.value = '';
+  seller.value = '';
+  price.value = '';
 
 }
