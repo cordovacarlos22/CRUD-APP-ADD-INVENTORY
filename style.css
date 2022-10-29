@@ -82,7 +82,13 @@ table .btndelete{
 
 
 
-
+#bnt-edit,
+#btn-delete{
+cursor: pointer;
+border: none;
+background: none;
+  
+}
 
 
 
