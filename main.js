@@ -157,16 +157,18 @@ function update2 (){
 
   prints()
 
-  // clear input form  after an input 
-  productName.value = '';
-  upcId.value = '';
-  seller.value = '';
-  price.value = '';
+  
   
   // to hidde add product button.
   addProduct.classList.remove("d-none");
   // to show update button.
   editProduct.classList.add("d-none");
+
+  // clear input form  after an input 
+  productName.value = '';
+  upcId.value = '';
+  seller.value = '';
+  price.value = '';
 
 }
 
