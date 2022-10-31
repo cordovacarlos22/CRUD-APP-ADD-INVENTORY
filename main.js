@@ -80,8 +80,8 @@ function prints() {
    <td>${element.upc}</td>
    <td>${element.sellers}</td>
    <td>${element.cost}</td>
-   <td><i onclick='update(event)' class="fas fa-edit btnedit"></i></td>
-   <td><i onclick='onDeleteRow(event)' class="btnErase fas fa-trash btndelete"></i></td>
+   <td><i onclick='update(event)' ontouchstart='update(event)' class="fas fa-edit btnedit"></i></td>
+   <td><i onclick='onDeleteRow(event)' ontouchstart='onDeleteRow(event)' class="btnErase fas fa-trash btndelete"></i></td>
    <td style='display:none'>${element.id}</td>
  </tr>  
  `;

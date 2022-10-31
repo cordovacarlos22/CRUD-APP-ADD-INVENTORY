@@ -81,7 +81,13 @@ table .btndelete{
 }
 
 
-
+#btn-edit,
+#btn-trash{
+    border: none;
+    background: none;
+    
+    cursor: pointer;
+}
 
 
 
